@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EXAMBANQ — Recherche avancée</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="app-layout">
+  <div id="sidebar-placeholder"></div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="page-title">Recherche Avancée</div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input class="search-input" type="text" placeholder="Rechercher une matière…" id="quickSearch"/>
+        </div>
+        <a href="ajout.html" class="btn btn-primary">＋ Ajouter</a>
+      </div>
+    </div>
+
+    <div class="page-body">
+
+      <!-- Formulaire de recherche -->
+      <div class="card" style="margin-bottom:20px">
+        <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">
+          Filtres de recherche
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px">
+          Combinez plusieurs critères pour affiner vos résultats
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Filière</label>
+            <select class="form-select" id="f-filiere">
+              <option value="">Toutes les filières</option>
+              <option>Génie Informatique</option>
+              <option>Génie Civil</option>
+              <option>Génie Électrique</option>
+              <option>Management</option>
+              <option>Mathématiques</option>
+              <option>Biologie</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Matière / Mot-clé</label>
+            <input class="form-input" type="text" placeholder="Ex: Algorithmique" id="f-matiere"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Année</label>
+            <select class="form-select" id="f-annee">
+              <option value="">Toutes</option>
+              <option>2024</option><option>2023</option>
+              <option>2022</option><option>2021</option><option>2020</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Session</label>
+            <select class="form-select" id="f-session">
+              <option value="">Toutes</option>
+              <option>Principale</option>
+              <option>Rattrapage</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Semestre</label>
+            <select class="form-select" id="f-semestre">
+              <option value="">Tous</option>
+              <option>S1</option><option>S2</option><option>S3</option>
+              <option>S4</option><option>S5</option><option>S6</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Type d'épreuve</label>
+            <select class="form-select" id="f-type">
+              <option value="">Tous les types</option>
+              <option>Examen Final</option>
+              <option>Partiel</option>
+              <option>TP</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Mot-clé dans le contenu</label>
+            <input class="form-input" type="text" placeholder="Recherche plein texte (optionnel)" id="f-keyword"/>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button class="btn btn-primary" onclick="doSearch()">⌕ Rechercher</button>
+          <button class="btn btn-ghost" onclick="resetForm()">Réinitialiser</button>
+        </div>
+      </div>
+
+      <!-- Résultats -->
+      <div class="section-header">
+        <div class="section-title">
+          Résultats
+          <span id="result-count" class="badge badge-green" style="margin-left:10px;font-size:12px">8 épreuves trouvées</span>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Filière</th>
+              <th>Matière</th>
+              <th>Année</th>
+              <th>Session</th>
+              <th>Semestre</th>
+              <th>Type</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="results-tbody">
+            <tr>
+              <td><span class="badge badge-blue">GI</span></td>
+              <td><strong>Algorithmique</strong></td>
+              <td><span class="badge badge-gold">2024</span></td>
+              <td><span class="badge badge-blue">Principale</span></td>
+              <td><span class="badge badge-green">S3</span></td>
+              <td style="color:var(--muted)">Examen Final</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-blue">GI</span></td>
+              <td><strong>Algorithmique</strong></td>
+              <td><span class="badge badge-gold">2023</span></td>
+              <td><span class="badge badge-blue">Principale</span></td>
+              <td><span class="badge badge-green">S3</span></td>
+              <td style="color:var(--muted)">Examen Final</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-blue">GI</span></td>
+              <td><strong>Algorithmique</strong></td>
+              <td><span class="badge badge-gold">2022</span></td>
+              <td><span class="badge badge-red">Rattrapage</span></td>
+              <td><span class="badge badge-green">S3</span></td>
+              <td style="color:var(--muted)">Partiel</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-purple">MA</span></td>
+              <td><strong>Algo. Numérique</strong></td>
+              <td><span class="badge badge-gold">2024</span></td>
+              <td><span class="badge badge-blue">Principale</span></td>
+              <td><span class="badge badge-green">S4</span></td>
+              <td style="color:var(--muted)">Examen Final</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-blue">GI</span></td>
+              <td><strong>Algorithmique</strong></td>
+              <td><span class="badge badge-gold">2021</span></td>
+              <td><span class="badge badge-blue">Principale</span></td>
+              <td><span class="badge badge-green">S3</span></td>
+              <td style="color:var(--muted)">Examen Final</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-blue">GI</span></td>
+              <td><strong>Algo. Avancée</strong></td>
+              <td><span class="badge badge-gold">2023</span></td>
+              <td><span class="badge badge-red">Rattrapage</span></td>
+              <td><span class="badge badge-green">S5</span></td>
+              <td style="color:var(--muted)">Partiel</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="sidebar.js"></script>
+<script>
+  buildSidebar('recherche');
+
+  function doSearch() {
+    const count = document.querySelectorAll('#results-tbody tr').length;
+    document.getElementById('result-count').textContent = count + ' épreuves trouvées';
+  }
+
+  function resetForm() {
+    ['f-filiere','f-annee','f-session','f-semestre','f-type'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('f-matiere').value = '';
+    document.getElementById('f-keyword').value = '';
+  }
+</script>
+</body>
+</html>

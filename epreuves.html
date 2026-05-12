@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EXAMBANQ — Épreuves</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="app-layout">
+  <div id="sidebar-placeholder"></div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="page-title" id="topbar-title">Épreuves</div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input class="search-input" type="text" placeholder="Rechercher une matière…" id="searchInput" oninput="filterTable()"/>
+        </div>
+        <a href="ajout.html" class="btn btn-primary">＋ Ajouter</a>
+      </div>
+    </div>
+
+    <div class="page-body">
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="filieres.html">Filières</a>
+        <span>›</span>
+        <span id="breadcrumb-current" style="color:var(--text)">Génie Informatique</span>
+      </div>
+
+      <!-- Detail header filière -->
+      <div class="detail-header" id="filiere-header">
+        <div class="detail-icon" style="background:rgba(47,111,237,.15);color:#4A85FF" id="filiere-icon">GI</div>
+        <div>
+          <div class="detail-name" id="filiere-name">Génie Informatique</div>
+          <div class="detail-badges">
+            <span class="badge badge-blue" id="filiere-code">GI</span>
+            <span class="badge badge-green">48 épreuves</span>
+            <span class="badge badge-gold">8 années couvertes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filtres -->
+      <div class="filters-bar">
+        <span class="filter-label">Année :</span>
+        <button class="filter-chip active" onclick="setFilter('annee','Toutes',this)">Toutes</button>
+        <button class="filter-chip" onclick="setFilter('annee','2024',this)">2024</button>
+        <button class="filter-chip" onclick="setFilter('annee','2023',this)">2023</button>
+        <button class="filter-chip" onclick="setFilter('annee','2022',this)">2022</button>
+        <button class="filter-chip" onclick="setFilter('annee','2021',this)">2021</button>
+        <div class="filter-sep"></div>
+        <span class="filter-label">Session :</span>
+        <button class="filter-chip active" onclick="setFilter('session','Toutes',this)">Toutes</button>
+        <button class="filter-chip" onclick="setFilter('session','Principale',this)">Principale</button>
+        <button class="filter-chip" onclick="setFilter('session','Rattrapage',this)">Rattrapage</button>
+      </div>
+
+      <!-- Tableau -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Matière</th>
+              <th>Année</th>
+              <th>Session</th>
+              <th>Semestre</th>
+              <th>Type</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="epreuves-tbody">
+            <tr data-annee="2024" data-session="Principale">
+              <td><strong>Algorithmique</strong></td>
+              <td><span class="badge badge-gold">2024</span></td>
+              <td><span class="badge badge-blue">Principale</span></td>
+              <td><span class="badge badge-green">S3</span></td>
+              <td style="color:var(--muted)">Examen Final</td>
+              <td class="td-actions">
+                <button class="action-btn" onclick="alert('Ouverture de l\'épreuve...')">Voir</button>
+                <button class="action-btn" onclick="alert('Téléchargement démarré...')">⬇</button>
+              </td>
+            </tr>
+            <tr data-annee="2024" data-session="Principale">
+              <td><strong>Base de Données</strong></td>
+              <td><span class="badge badge-gold">2024</span></td>
+              <td><span class="badge badge-blue">Principale</span></td>
+              <td><span class="badge badge-green">S4</span></td>
+              <td style="color:var(--muted)">Examen Final</td>
+              <td class="td-actions">
+                <button class="action-btn" onclick="alert('Ouverture...')">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr data-annee="2023" data-session="Rattrapage">
+              <td><strong>Réseaux Informatiques</strong></td>
+              <td><span class="badge badge-gold">2023</span></td>
+              <td><span class="badge badge-red">Rattrapage</span></td>
+              <td><span class="badge badge-green">S5</span></td>
+              <td style="color:var(--muted)">Partiel</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr data-annee="2023" data-session="Principale">
+              <td><strong>Programmation Web</strong></td>
+              <td><span class="badge badge-gold">2023</span></td>
+              <td><span class="badge badge-blue">Principale</span></td>
+              <td><span class="badge badge-green">S4</span></td>
+              <td style="color:var(--muted)">Examen Final</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr data-annee="2022" data-session="Principale">
+              <td><strong>Systèmes d'Exploitation</strong></td>
+              <td><span class="badge badge-gold">2022</span></td>
+              <td><span class="badge badge-blue">Principale</span></td>
+              <td><span class="badge badge-green">S3</span></td>
+              <td style="color:var(--muted)">Examen Final</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr data-annee="2022" data-session="Rattrapage">
+              <td><strong>Compilation</strong></td>
+              <td><span class="badge badge-gold">2022</span></td>
+              <td><span class="badge badge-red">Rattrapage</span></td>
+              <td><span class="badge badge-green">S5</span></td>
+              <td style="color:var(--muted)">Partiel</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+            <tr data-annee="2021" data-session="Principale">
+              <td><strong>Intelligence Artificielle</strong></td>
+              <td><span class="badge badge-gold">2021</span></td>
+              <td><span class="badge badge-blue">Principale</span></td>
+              <td><span class="badge badge-green">S6</span></td>
+              <td style="color:var(--muted)">Examen Final</td>
+              <td class="td-actions">
+                <button class="action-btn">Voir</button>
+                <button class="action-btn">⬇</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button class="page-btn">‹</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">4</button>
+          <button class="page-btn">›</button>
+          <span style="margin-left:8px;font-family:var(--font-mono);font-size:11px">48 épreuves au total</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="sidebar.js"></script>
+<script>
+  buildSidebar('epreuves');
+
+  // Filtres actifs
+  let filters = { annee: 'Toutes', session: 'Toutes' };
+
+  function setFilter(type, value, btn) {
+    filters[type] = value;
+    // reset chips du même groupe
+    btn.closest('.filters-bar').querySelectorAll('.filter-chip').forEach(c => {
+      if (c.closest('.filters-bar') === btn.closest('.filters-bar')) {
+        // ne reset que les chips du même "groupe"
+      }
+    });
+    // Reset uniquement les chips du même groupe
+    const allChips = document.querySelectorAll('.filter-chip');
+    allChips.forEach(c => {
+      if (c.getAttribute('onclick').includes(`'${type}'`)) {
+        c.classList.remove('active');
+      }
+    });
+    btn.classList.add('active');
+    filterTable();
+  }
+
+  function filterTable() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const rows = document.querySelectorAll('#epreuves-tbody tr');
+    rows.forEach(row => {
+      const annee = row.dataset.annee;
+      const session = row.dataset.session;
+      const text = row.querySelector('strong').textContent.toLowerCase();
+      const matchAnnee   = filters.annee   === 'Toutes' || annee   === filters.annee;
+      const matchSession = filters.session === 'Toutes' || session === filters.session;
+      const matchSearch  = text.includes(q);
+      row.style.display = (matchAnnee && matchSession && matchSearch) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EXAMBANQ — Ajouter une épreuve</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="app-layout">
+  <div id="sidebar-placeholder"></div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="page-title">Ajouter une nouvelle épreuve</div>
+      </div>
+      <div class="topbar-right">
+        <a href="epreuves.html" class="btn btn-ghost">Annuler</a>
+      </div>
+    </div>
+
+    <div class="page-body" style="max-width:760px">
+
+      <!-- Stepper -->
+      <div class="stepper">
+        <div class="step active">
+          <div class="step-circle">1</div>
+          <div class="step-label">Informations</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-circle">2</div>
+          <div class="step-label">Fichier PDF</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-label">Confirmation</div>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="card">
+        <div style="margin-bottom:20px">
+          <div style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px">
+            Étape 1 — Informations générales de l'épreuve
+          </div>
+          <div style="font-size:12px;color:var(--muted)">Remplissez tous les champs obligatoires (*)</div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Filière <span class="req">*</span></label>
+            <select class="form-select">
+              <option value="">Sélectionner une filière</option>
+              <option>Génie Informatique</option>
+              <option>Génie Civil</option>
+              <option>Génie Électrique</option>
+              <option>Management</option>
+              <option>Mathématiques</option>
+              <option>Biologie</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Matière <span class="req">*</span></label>
+            <input class="form-input" type="text" placeholder="Ex: Algorithmique et structures de données"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Année universitaire <span class="req">*</span></label>
+            <select class="form-select">
+              <option value="">Sélectionner l'année</option>
+              <option>2024 / 2025</option>
+              <option>2023 / 2024</option>
+              <option>2022 / 2023</option>
+              <option>2021 / 2022</option>
+              <option>2020 / 2021</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Semestre <span class="req">*</span></label>
+            <select class="form-select">
+              <option value="">Choisir</option>
+              <option>S1</option><option>S2</option><option>S3</option>
+              <option>S4</option><option>S5</option><option>S6</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Session <span class="req">*</span></label>
+            <select class="form-select">
+              <option value="">Choisir</option>
+              <option>Principale</option>
+              <option>Rattrapage</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Type d'épreuve <span class="req">*</span></label>
+            <select class="form-select">
+              <option value="">Choisir</option>
+              <option>Examen Final</option>
+              <option>Partiel</option>
+              <option>TP</option>
+              <option>TD</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Durée</label>
+            <input class="form-input" type="text" placeholder="Ex: 2h30"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Coefficient</label>
+            <input class="form-input" type="number" placeholder="Ex: 3"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Enseignant responsable</label>
+            <input class="form-input" type="text" placeholder="Nom de l'enseignant (optionnel)"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Notes / Observations</label>
+            <textarea class="form-input form-textarea" placeholder="Informations supplémentaires (optionnel)"></textarea>
+          </div>
+
+          <!-- Upload -->
+          <div class="form-group full">
+            <label class="form-label">Fichier PDF de l'épreuve <span class="req">*</span></label>
+            <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+              <div class="upload-icon">📎</div>
+              <div class="upload-text">
+                <strong>Cliquer pour sélectionner</strong> ou glisser-déposer
+              </div>
+              <div class="upload-note">Format PDF uniquement &nbsp;·&nbsp; Taille max : 20 Mo</div>
+              <input type="file" id="fileInput" accept=".pdf" style="display:none" onchange="showFile(this)"/>
+            </div>
+            <div id="filePreview" style="display:none;margin-top:10px;padding:12px 16px;background:var(--surface2);border-radius:var(--r);border:1px solid var(--border);display:flex;align-items:center;gap:12px">
+              <span style="font-size:20px">📄</span>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--text)" id="fileName">fichier.pdf</div>
+                <div style="font-size:11px;color:var(--muted)" id="fileSize">0 Ko</div>
+              </div>
+              <button onclick="clearFile()" style="margin-left:auto;background:none;border:none;color:var(--red);font-size:16px;cursor:pointer">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Boutons -->
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)">
+          <a href="epreuves.html" class="btn btn-ghost">Annuler</a>
+          <button class="btn btn-primary" onclick="nextStep()">Suivant →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="sidebar.js"></script>
+<script>
+  buildSidebar('epreuves');
+
+  function showFile(input) {
+    const file = input.files[0];
+    if (!file) return;
+    document.getElementById('uploadZone').style.borderColor = 'var(--green)';
+    document.getElementById('filePreview').style.display = 'flex';
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('fileSize').textContent = (file.size / 1024).toFixed(1) + ' Ko';
+  }
+
+  function clearFile() {
+    document.getElementById('fileInput').value = '';
+    document.getElementById('filePreview').style.display = 'none';
+    document.getElementById('uploadZone').style.borderColor = '';
+  }
+
+  // Drag & drop
+  const zone = document.getElementById('uploadZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--accent)'; });
+  zone.addEventListener('dragleave', () => zone.style.borderColor = '');
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    const dt = e.dataTransfer;
+    if (dt.files.length) {
+      document.getElementById('fileInput').files = dt.files;
+      showFile(document.getElementById('fileInput'));
+    }
+  });
+
+  function nextStep() {
+    alert('✅ Épreuve enregistrée avec succès !');
+    window.location.href = 'epreuves.html';
+  }
+</script>
+</body>
+</html>

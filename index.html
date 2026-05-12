@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXAMBANQ — Connexion</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Styles spécifiques à la page Login */
+    body { display: flex; align-items: stretch; min-height: 100vh; overflow: hidden; }
+
+    .login-page { display: flex; width: 100%; height: 100vh; }
+
+    /* Panneau gauche */
+    .login-left {
+      width: 420px; min-width: 420px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .login-left::before {
+      content: '';
+      position: absolute; top: -120px; left: -120px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(47,111,237,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .login-left::after {
+      content: '';
+      position: absolute; bottom: -80px; right: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(168,85,247,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .brand-logo {
+      position: relative;
+      width: 80px; height: 80px;
+      background: var(--accent);
+      border-radius: 22px;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 16px 48px rgba(47,111,237,.35);
+    }
+    .brand-eb {
+      font-family: var(--font-display);
+      font-weight: 800; font-size: 28px; color: var(--white);
+      line-height: 1;
+    }
+    /* Chapeau SVG */
+    .brand-hat {
+      position: absolute; top: -16px; left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 800; color: var(--text);
+      margin-bottom: 8px;
+    }
+    .brand-desc {
+      font-size: 13px; color: var(--muted);
+      text-align: center; max-width: 260px;
+      line-height: 1.6; margin-bottom: 36px;
+    }
+    .features { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 260px; }
+    .feature-item {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(47,111,237,.08);
+      border: 1px solid rgba(47,111,237,.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px; color: var(--text);
+    }
+    .feature-check { color: var(--accent-h); font-weight: 700; }
+
+    /* Panneau droit */
+    .login-right {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px;
+    }
+    .login-form-box {
+      width: 100%; max-width: 400px;
+    }
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 26px; font-weight: 800; color: var(--text);
+      margin-bottom: 6px;
+    }
+    .form-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+
+    .form-sep { height: 1px; background: var(--border); margin-bottom: 28px; }
+
+    .role-selector { display: flex; gap: 8px; margin-bottom: 6px; }
+    .role-btn {
+      flex: 1; padding: 9px; border-radius: 9px;
+      font-size: 12.5px; font-weight: 600; font-family: var(--font-body);
+      border: 1px solid var(--border);
+      background: var(--surface2); color: var(--muted);
+      cursor: pointer; transition: all .2s;
+      text-align: center;
+    }
+    .role-btn.active {
+      background: rgba(47,111,237,.15);
+      border-color: var(--accent); color: var(--accent-h);
+    }
+    .role-btn:hover:not(.active) { color: var(--text); }
+
+    .forgot-link {
+      display: block; text-align: right;
+      font-size: 12px; color: var(--accent-h); margin-top: -8px;
+      margin-bottom: 20px;
+    }
+    .forgot-link:hover { text-decoration: underline; }
+
+    .login-btn {
+      width: 100%; padding: 13px;
+      background: var(--accent); color: var(--white);
+      border: none; border-radius: var(--r);
+      font-size: 14px; font-weight: 700; font-family: var(--font-display);
+      cursor: pointer; transition: all .2s;
+      letter-spacing: .02em;
+    }
+    .login-btn:hover { background: var(--accent-h); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(47,111,237,.4); }
+
+    .login-footer {
+      text-align: center; margin-top: 28px;
+      font-size: 11px; color: var(--muted);
+      font-family: var(--font-mono); line-height: 1.8;
+    }
+
+    /* champ */
+    .field-wrap { margin-bottom: 18px; }
+    .field-label {
+      display: block; font-size: 10.5px;
+      font-family: var(--font-mono); color: var(--muted);
+      text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: 7px;
+    }
+    .field-input {
+      width: 100%; padding: 11px 14px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--r); color: var(--text);
+      font-size: 13.5px; outline: none; transition: border-color .2s;
+    }
+    .field-input:focus { border-color: var(--accent); }
+    .field-input::placeholder { color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .login-left { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="login-page">
+
+  <!-- ── Panneau gauche ── -->
+  <div class="login-left">
+    <div class="brand-logo">
+      <!-- Chapeau de diplôme SVG -->
+      <svg class="brand-hat" viewBox="0 0 70 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bord du chapeau -->
+        <rect x="2" y="14" width="66" height="9" rx="2" fill="white"/>
+        <!-- Dessus losange -->
+        <polygon points="35,0 62,14 35,22 8,14" fill="white"/>
+        <!-- Pompon ligne -->
+        <line x1="52" y1="14" x2="58" y2="6" stroke="white" stroke-width="2"/>
+        <circle cx="59" cy="4" r="3" fill="white"/>
+      </svg>
+      <span class="brand-eb">EB</span>
+    </div>
+
+    <div class="brand-name">EXAMBANQ</div>
+    <div class="brand-desc">Plateforme de gestion des anciennes épreuves d'examen par filière</div>
+
+    <div class="features">
+      <div class="feature-item"><span class="feature-check">✓</span> Toutes filières</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Multi-années</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Recherche avancée</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Téléchargement PDF</div>
+    </div>
+  </div>
+
+  <!-- ── Panneau droit (formulaire) ── -->
+  <div class="login-right">
+    <div class="login-form-box">
+      <div class="form-title">Connexion</div>
+      <div class="form-subtitle">Entrez vos identifiants pour continuer</div>
+      <div class="form-sep"></div>
+
+      <div class="field-wrap">
+        <label class="field-label">Identifiant / Email</label>
+        <input class="field-input" type="email" placeholder="ex: admin@univ.ma" />
+      </div>
+
+      <div class="field-wrap">
+        <label class="field-label">Mot de passe</label>
+        <input class="field-input" type="password" placeholder="••••••••" />
+      </div>
+
+      <a href="#" class="forgot-link">Mot de passe oublié ?</a>
+
+      <div class="field-wrap">
+        <label class="field-label">Profil</label>
+        <div class="role-selector">
+          <button class="role-btn active" onclick="setRole(this)">Administrateur</button>
+          <button class="role-btn" onclick="setRole(this)">Enseignant</button>
+          <button class="role-btn" onclick="setRole(this)">Étudiant</button>
+        </div>
+      </div>
+
+      <button class="login-btn" onclick="window.location.href='dashboard.html'">
+        Se connecter
+      </button>
+
+      <div class="login-footer">
+        EXAMBANQ v2.0 — Établissement Supérieur<br>
+        Accès réservé au personnel autorisé
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function setRole(btn) {
+    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>

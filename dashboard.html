@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EXAMBANQ — Tableau de bord</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="app-layout">
+  <div id="sidebar-placeholder"></div>
+
+  <div class="main-content">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="page-title">Tableau de bord</div>
+      </div>
+      <div class="topbar-right">
+        <a href="ajout.html" class="btn btn-primary">＋ Ajouter</a>
+      </div>
+    </div>
+
+    <!-- Corps -->
+    <div class="page-body">
+
+      <!-- Bannière bienvenue -->
+      <div class="welcome-banner">
+        <div>
+          <div class="welcome-title">Bienvenue, Administrateur 👋</div>
+          <div class="welcome-sub">Année universitaire 2024 - 2025 &nbsp;|&nbsp; Semestre en cours : S2</div>
+        </div>
+        <a href="epreuves.html" class="btn btn-ghost" style="font-size:12px;">Voir toutes les épreuves →</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card blue">
+          <div class="stat-label">Total épreuves</div>
+          <div class="stat-value">243</div>
+          <div class="stat-sub">↑ +18 ce semestre</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">Filières</div>
+          <div class="stat-value">6</div>
+          <div class="stat-sub">Actives</div>
+        </div>
+        <div class="stat-card gold">
+          <div class="stat-label">Années couvertes</div>
+          <div class="stat-value">8</div>
+          <div class="stat-sub">2016 – 2024</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-label">Téléchargements</div>
+          <div class="stat-value">1 247</div>
+          <div class="stat-sub">Ce mois</div>
+        </div>
+      </div>
+
+      <!-- Dashboard grid -->
+      <div class="dashboard-grid">
+        <!-- Gauche : filières + épreuves récentes -->
+        <div>
+          <div class="section-header">
+            <div class="section-title">Filières</div>
+            <a href="filieres.html" class="btn btn-ghost" style="font-size:12px;">Voir toutes →</a>
+          </div>
+          <div class="dashboard-filieres-grid">
+            <!-- GI -->
+            <a href="epreuves.html?filiere=GI" class="mini-filiere-card">
+              <div class="mini-icon" style="background:rgba(47,111,237,.2);color:#4A85FF">GI</div>
+              <div class="mini-count">48</div>
+              <div class="mini-lbl">Génie Informatique</div>
+              <div class="progress-bar" style="margin-top:8px">
+                <div class="progress-fill" style="width:80%;background:#2F6FED"></div>
+              </div>
+            </a>
+            <!-- MA -->
+            <a href="epreuves.html?filiere=MA" class="mini-filiere-card">
+              <div class="mini-icon" style="background:rgba(168,85,247,.2);color:#A855F7">MA</div>
+              <div class="mini-count">55</div>
+              <div class="mini-lbl">Mathématiques</div>
+              <div class="progress-bar" style="margin-top:8px">
+                <div class="progress-fill" style="width:92%;background:#A855F7"></div>
+              </div>
+            </a>
+            <!-- GE -->
+            <a href="epreuves.html?filiere=GE" class="mini-filiere-card">
+              <div class="mini-icon" style="background:rgba(245,158,11,.2);color:#F59E0B">GE</div>
+              <div class="mini-count">42</div>
+              <div class="mini-lbl">Génie Électrique</div>
+              <div class="progress-bar" style="margin-top:8px">
+                <div class="progress-fill" style="width:70%;background:#F59E0B"></div>
+              </div>
+            </a>
+            <!-- GC -->
+            <a href="epreuves.html?filiere=GC" class="mini-filiere-card">
+              <div class="mini-icon" style="background:rgba(34,197,94,.2);color:#22C55E">GC</div>
+              <div class="mini-count">36</div>
+              <div class="mini-lbl">Génie Civil</div>
+              <div class="progress-bar" style="margin-top:8px">
+                <div class="progress-fill" style="width:60%;background:#22C55E"></div>
+              </div>
+            </a>
+            <!-- BIO -->
+            <a href="epreuves.html?filiere=BIO" class="mini-filiere-card">
+              <div class="mini-icon" style="background:rgba(20,184,166,.2);color:#14B8A6">BIO</div>
+              <div class="mini-count">33</div>
+              <div class="mini-lbl">Biologie</div>
+              <div class="progress-bar" style="margin-top:8px">
+                <div class="progress-fill" style="width:55%;background:#14B8A6"></div>
+              </div>
+            </a>
+            <!-- MG -->
+            <a href="epreuves.html?filiere=MG" class="mini-filiere-card">
+              <div class="mini-icon" style="background:rgba(239,68,68,.2);color:#EF4444">MG</div>
+              <div class="mini-count">29</div>
+              <div class="mini-lbl">Management</div>
+              <div class="progress-bar" style="margin-top:8px">
+                <div class="progress-fill" style="width:48%;background:#EF4444"></div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Droite : activité récente -->
+        <div>
+          <div class="section-header">
+            <div class="section-title">Activité récente</div>
+          </div>
+          <div class="card">
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#2F6FED"></div>
+                <div>
+                  <div class="activity-text">Algo S3 2024 ajoutée — GI</div>
+                  <div class="activity-time">Il y a 2h</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#22C55E"></div>
+                <div>
+                  <div class="activity-text">RDM S3 téléchargé — GC</div>
+                  <div class="activity-time">Il y a 5h</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#F59E0B"></div>
+                <div>
+                  <div class="activity-text">Analyse S1 modifiée — MA</div>
+                  <div class="activity-time">Hier</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#14B8A6"></div>
+                <div>
+                  <div class="activity-text">Nouvelle filière : Biologie</div>
+                  <div class="activity-time">Il y a 3j</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#6B7899"></div>
+                <div>
+                  <div class="activity-text">Backup automatique effectué</div>
+                  <div class="activity-time">Il y a 5j</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-body -->
+  </div><!-- /main-content -->
+</div><!-- /app-layout -->
+
+<script src="sidebar.js"></script>
+<script>buildSidebar('dashboard');</script>
+</body>
+</html>
